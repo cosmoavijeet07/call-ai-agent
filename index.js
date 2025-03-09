@@ -133,7 +133,12 @@ fastify.all("/incoming-call", async (request, reply) => {
 // Route for outbound calls from Make.com
 fastify.post("/outgoing-call", async (request, reply) => {
     const { firstMessage, callerNumber } = request.body;
+    console.log("Request Body:", request.body); // Log the entire request body
     console.log(`Initiating outbound call to ${callerNumber} with message: ${firstMessage}`);
+
+    if (!callerNumber) {
+        return reply.status(400).send({ error: "Missing or invalid callerNumber" });
+    }
 
     try {
         const call = await twilioClient.calls.create({
