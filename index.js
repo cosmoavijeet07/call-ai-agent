@@ -120,7 +120,7 @@ fastify.all("/incoming-call", async (request, reply) => {
     const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
                           <Response>
                               <Connect>
-                                  <Stream url="wss://d9b236da-8170-4324-a85c-a1db9e8c9494-00-110xrwvm4rgyv.pike.replit.dev:8000/media-stream">  // WebSocket URL for media stream
+                                  <Stream url="wss://${request.headers.host}/media-stream">  // WebSocket URL for media stream
                                         <Parameter name="firstMessage" value="${firstMessage}" />  // Send the first message as a parameter
                                         <Parameter name="callerNumber" value="${callerNumber}" />  // Send caller number as a parameter
                                   </Stream>
@@ -157,7 +157,7 @@ fastify.all("/outgoing-call-twiml", async (request, reply) => {
     const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
                             <Response>
                               <Connect>
-                                  <Stream url="wss://d9b236da-8170-4324-a85c-a1db9e8c9494-00-110xrwvm4rgyv.pike.replit.dev:8000/media-stream">
+                                  <Stream url="wss://${request.headers.host}/media-stream">
                                       <Parameter name="firstMessage" value="${firstMessage}" />
                                       <Parameter name="callerNumber" value="${callerNumber}" />
                                   </Stream>
