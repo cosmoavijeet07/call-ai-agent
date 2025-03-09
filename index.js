@@ -144,7 +144,7 @@ fastify.post("/outgoing-call", async (request, reply) => {
         const call = await twilioClient.calls.create({
             from: TWILIO_NUMBER,
             to: callerNumber,
-            url: `https://${request.headers.host}/outgoing-call-twiml?firstMessage=${encodeURIComponent(firstMessage)}&number=${encodeURIComponent(callerNumber)}`,
+            url: `https://call-ai-agent-268a-avijeet-palits-projects.vercel.app/outgoing-call-twiml?firstMessage=${encodeURIComponent(firstMessage)}&number=${encodeURIComponent(callerNumber)}`,
         });
         reply.send({ message: "Call initiated", callSid: call.sid });
     } catch (error) {
@@ -162,7 +162,7 @@ fastify.all("/outgoing-call-twiml", async (request, reply) => {
     const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
                             <Response>
                               <Connect>
-                                  <Stream url="wss://${request.headers.host}/media-stream">
+                                  <Stream url="wss://call-ai-agent-268a-avijeet-palits-projects.vercel.app/media-stream">
                                       <Parameter name="firstMessage" value="${firstMessage}" />
                                       <Parameter name="callerNumber" value="${callerNumber}" />
                                   </Stream>
