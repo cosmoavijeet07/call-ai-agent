@@ -160,11 +160,11 @@ fastify.all("/outgoing-call-twiml", async (request, reply) => {
     console.log(`First Message: ${firstMessage}`);
 
     const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
-                            <Response>
+                          <Response>
                               <Connect>
-                                  <Stream url="wss://call-ai-agent-268a-avijeet-palits-projects.vercel.app/media-stream">
-                                      <Parameter name="firstMessage" value="${firstMessage}" />
-                                      <Parameter name="callerNumber" value="${callerNumber}" />
+                                  <Stream url="wss://${request.headers.host}/media-stream">  // WebSocket URL for media stream
+                                        <Parameter name="firstMessage" value="${firstMessage}" />  // Send the first message as a parameter
+                                        <Parameter name="callerNumber" value="${callerNumber}" />  // Send caller number as a parameter
                                   </Stream>
                               </Connect>
                           </Response>`;
